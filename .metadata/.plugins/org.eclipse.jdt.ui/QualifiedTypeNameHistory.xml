@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.DiscordBuilder"/>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.event.EventListener"/>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.events.UserChatEvent"/>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.message.MessageBuilder"/>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.message.Message"/>
+</qualifiedTypeNameHistroy>

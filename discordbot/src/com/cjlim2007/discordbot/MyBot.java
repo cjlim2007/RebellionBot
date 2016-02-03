@@ -1,4 +1,5 @@
 package com.cjlim2007.discordbot;
+import me.itsghost.jdiscord.AccountManager;
 import me.itsghost.jdiscord.DiscordAPI;
 import me.itsghost.jdiscord.DiscordBuilder;
 import me.itsghost.jdiscord.event.EventListener;
@@ -10,7 +11,6 @@ import me.itsghost.jdiscord.message.MessageBuilder;
 public class MyBot implements EventListener{
 	
 	private DiscordAPI api;
-	
 	public MyBot() 
 	{
 		api = new DiscordBuilder().build();
@@ -19,7 +19,7 @@ public class MyBot implements EventListener{
 
 	public void userSaysSomething(UserChatEvent event)
 	{
-		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!"};
+		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!", "Isn't this just a shitposting topic?"};
 		String message = event.getMsg().getMessage();
 		if(message.equalsIgnoreCase("/lenny"))
 		{
@@ -37,12 +37,17 @@ public class MyBot implements EventListener{
 		} else if (message.equalsIgnoreCase("angelo")) {
 			event.getMsg().deleteMessage();
 			MessageBuilder builder = new MessageBuilder();
-			builder.addString(angelo[(int)(Math.random()*5)]);
+			builder.addString(angelo[(int)(Math.random()*6)]);
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
 		} else if (message.equalsIgnoreCase("delicious loli")) {
 			MessageBuilder builder = new MessageBuilder();
 			builder.addString("Did somebody say delicious loli? ( ͡° ͜ʖ ͡°) https://www.youtube.com/watch?v=d28V8wRdypI");
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("yumemi, if you would do the honors, please")) {
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("( ͡° ͜ʖ ͡°)");
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
 		}
@@ -59,8 +64,8 @@ public class MyBot implements EventListener{
 	
 	public static void main(String[] args) 
 	{
-		MyBot bot = new MyBot();
-		bot.connect();
+		MyBot yumemi = new MyBot();
+		yumemi.connect();
 	}
 
 }

@@ -5,4 +5,6 @@
 <fullyQualifiedTypeName name="me.itsghost.jdiscord.events.UserChatEvent"/>
 <fullyQualifiedTypeName name="me.itsghost.jdiscord.message.MessageBuilder"/>
 <fullyQualifiedTypeName name="me.itsghost.jdiscord.message.Message"/>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.internal.impl.AccountManagerImpl"/>
+<fullyQualifiedTypeName name="me.itsghost.jdiscord.AccountManager"/>
 </qualifiedTypeNameHistroy>

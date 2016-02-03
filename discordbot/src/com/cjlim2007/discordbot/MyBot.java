@@ -19,11 +19,30 @@ public class MyBot implements EventListener{
 
 	public void userSaysSomething(UserChatEvent event)
 	{
+		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!"};
 		String message = event.getMsg().getMessage();
-		if(message.equalsIgnoreCase("lenny"))
+		if(message.equalsIgnoreCase("/lenny"))
 		{
+			event.getMsg().deleteMessage();
 			MessageBuilder builder = new MessageBuilder();
 			builder.addString("( ͡° ͜ʖ ͡°)");
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("/lennys")) {
+			event.getMsg().deleteMessage();
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("          ( ͡° ͜ʖ ͡°)\n     ( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)\n( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)");
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("angelo")) {
+			event.getMsg().deleteMessage();
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString(angelo[(int)(Math.random()*5)]);
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("delicious loli")) {
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("Did somebody say delicious loli? ( ͡° ͜ʖ ͡°) https://www.youtube.com/watch?v=d28V8wRdypI");
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
 		}

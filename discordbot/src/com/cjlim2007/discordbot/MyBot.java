@@ -1,5 +1,5 @@
 package com.cjlim2007.discordbot;
-import me.itsghost.jdiscord.AccountManager;
+import org.apache.commons.codec.binary.Base64;
 import me.itsghost.jdiscord.DiscordAPI;
 import me.itsghost.jdiscord.DiscordBuilder;
 import me.itsghost.jdiscord.event.EventListener;
@@ -19,16 +19,36 @@ public class MyBot implements EventListener{
 
 	public void userSaysSomething(UserChatEvent event)
 	{
-		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!", "Isn't this just a shitposting topic?"};
+		String command;
+		String allArguments;
+		String[] arguments;
 		String message = event.getMsg().getMessage();
-		if(message.equalsIgnoreCase("/lenny"))
+		String parts[] = message.split(" ", 2);
+		command = parts[0];
+		byte[] encodedBytes = null;
+		byte[] encodedName = null;
+		
+		if (parts.length==2) {
+			allArguments = parts[1];
+			arguments = allArguments.split("-", 2);
+			encodedBytes = Base64.encodeBase64(arguments[0].getBytes());
+			encodedName = Base64.encodeBase64(arguments[arguments.length-1].getBytes());
+		} else {
+			allArguments = null;
+			arguments = null;
+		}
+		
+
+		
+		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!", "Isn't this just a shitposting topic?"};
+		if(command.equalsIgnoreCase("/lenny"))
 		{
 			event.getMsg().deleteMessage();
 			MessageBuilder builder = new MessageBuilder();
 			builder.addString("( ͡° ͜ʖ ͡°)");
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
-		} else if (message.equalsIgnoreCase("/lennys")) {
+		} else if (command.equalsIgnoreCase("/lennys")) {
 			event.getMsg().deleteMessage();
 			MessageBuilder builder = new MessageBuilder();
 			builder.addString("          ( ͡° ͜ʖ ͡°)\n     ( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)\n( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)");
@@ -45,9 +65,18 @@ public class MyBot implements EventListener{
 			builder.addString("Did somebody say delicious loli? ( ͡° ͜ʖ ͡°) https://www.youtube.com/watch?v=d28V8wRdypI");
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
-		} else if (message.equalsIgnoreCase("yumemi, if you would do the honors, please")) {
+		} else if (message.equalsIgnoreCase("arr yuu angero?")) {
 			MessageBuilder builder = new MessageBuilder();
-			builder.addString("( ͡° ͜ʖ ͡°)");
+			builder.addString(angelo[(int)(Math.random()*2)]);
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (command.equalsIgnoreCase("!aphorism")) {
+			event.getMsg().deleteMessage();
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("https://aphorisms.kazamatsuri.org/?");
+			builder.addString(new String(encodedBytes));
+			builder.addString("?");
+			builder.addString(new String(encodedName));
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
 		}

@@ -1,0 +1,98 @@
+package com.cjlim2007.discordbot;
+import me.itsghost.jdiscord.AccountManager;
+import org.apache.commons.codec.binary.Base64;
+import me.itsghost.jdiscord.DiscordAPI;
+import me.itsghost.jdiscord.DiscordBuilder;
+import me.itsghost.jdiscord.event.EventListener;
+import me.itsghost.jdiscord.events.UserChatEvent;
+import me.itsghost.jdiscord.exception.BadUsernamePasswordException;
+import me.itsghost.jdiscord.exception.DiscordFailedToConnectException;
+import me.itsghost.jdiscord.message.Message;
+import me.itsghost.jdiscord.message.MessageBuilder;
+public class MyBot implements EventListener{
+	
+	private DiscordAPI api;
+	public MyBot() 
+	{
+		api = new DiscordBuilder().build();
+		api.getEventManager().registerListener(this);
+	}
+
+	public void userSaysSomething(UserChatEvent event)
+	{
+		String command;
+		String allArguments;
+		String[] arguments;
+		String rawMessage = event.getMsg().getMessage();
+		String name = event.getUser().getUser().getUsername();
+		String parts[] = rawMessage.split(" ", 2);
+		command = parts[0];
+		
+		if (parts.length==2) {
+			allArguments = parts[1];
+			arguments = allArguments.split(" ");
+		} else {
+			allArguments = null;
+		}
+		
+		byte[] encodedBytes = Base64.encodeBase64(allArguments.getBytes());
+		byte[] encodedName = Base64.encodeBase64(name.getBytes());
+		
+		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!", "Isn't this just a shitposting topic?"};
+		String message = event.getMsg().getMessage();
+		if(message.equalsIgnoreCase("/lenny"))
+		{
+			event.getMsg().deleteMessage();
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("( ͡° ͜ʖ ͡°)");
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("/lennys")) {
+			event.getMsg().deleteMessage();
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("          ( ͡° ͜ʖ ͡°)\n     ( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)\n( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)");
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("angelo")) {
+			event.getMsg().deleteMessage();
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString(angelo[(int)(Math.random()*6)]);
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("delicious loli")) {
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("Did somebody say delicious loli? ( ͡° ͜ʖ ͡°) https://www.youtube.com/watch?v=d28V8wRdypI");
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (message.equalsIgnoreCase("arr yuu angero?")) {
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString(angelo[(int)(Math.random()*2)]);
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		} else if (command.equalsIgnoreCase("!aphorism")) {
+			MessageBuilder builder = new MessageBuilder();
+			builder.addString("aphorisms.kazamatsuri.org/?");
+			builder.addString(new String(encodedBytes));
+			builder.addString("?");
+			builder.addString(new String(encodedName));
+			Message reply = builder.build(api);
+			event.getGroup().sendMessage(reply);
+		}
+	}
+	
+	public void connect() 
+	{
+		try {
+			api.login("cjlim2010@yahoo.com","onlyontuesdays");
+		} catch (BadUsernamePasswordException | DiscordFailedToConnectException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		MyBot yumemi = new MyBot();
+		yumemi.connect();
+	}
+
+}

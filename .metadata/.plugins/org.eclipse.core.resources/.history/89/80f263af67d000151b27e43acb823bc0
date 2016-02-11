@@ -1,7 +1,5 @@
 package com.cjlim2007.discordbot;
 import org.apache.commons.codec.binary.Base64;
-
-import me.itsghost.jdiscord.AccountManager;
 import me.itsghost.jdiscord.DiscordAPI;
 import me.itsghost.jdiscord.DiscordBuilder;
 import me.itsghost.jdiscord.event.EventListener;
@@ -45,9 +43,9 @@ public class MyBot implements EventListener{
 		String[] angelo = {"What?", "Huh?", "What do you want from me?", "Oh gosh!","Who are you?!", "Isn't this just a shitposting topic?"};
 		if(command.equalsIgnoreCase("/lenny"))
 		{
-			event.getMsg().deleteMessage();
+			
 			MessageBuilder builder = new MessageBuilder();
-			builder.addString("( ͡° ͜ʖ ͡°)");
+			builder.addString("/lenny ( ͡° ͜ʖ ͡°)");
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
 		} else if (command.equalsIgnoreCase("/lennys")) {
@@ -82,14 +80,11 @@ public class MyBot implements EventListener{
 			Message reply = builder.build(api);
 			event.getGroup().sendMessage(reply);
 		} else if (command.equalsIgnoreCase("!help")) {
-			event.getMsg().deleteMessage();
 			MessageBuilder builder = new MessageBuilder();
-			builder.addString("```!aphorism <quote> -<author>``` for aphorism\n```/lenny``` for a lenny\n```angelo``` for shitposting\n```delicious loli``` for a suprise ( ͡° ͜ʖ ͡°)\nyou may used this pm as a space to test out your shitposting needs");
+			builder.addString("!aphorism <quote> -<author>\n/lenny for a lenny\nangelo for shitposting\ndelicious loli for a suprise ( ͡° ͜ʖ ͡°)");
 			Message reply = builder.build(api);
-			event.getUser().getUser().getGroup().sendMessage(reply);
-		} //else if (event.getUser().getUser().getUsername().equalsIgnoreCase("j1lin0101")) {
-		//	event.getMsg().deleteMessage();
-		//}
+			event.getGroup().sendMessage(reply);
+		}
 	}
 	
 	public void connect() 

@@ -7,4 +7,6 @@
 <fullyQualifiedTypeName name="me.itsghost.jdiscord.message.Message"/>
 <fullyQualifiedTypeName name="me.itsghost.jdiscord.internal.impl.AccountManagerImpl"/>
 <fullyQualifiedTypeName name="me.itsghost.jdiscord.AccountManager"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="org.apache.commons.codec.binary.Base64"/>
 </qualifiedTypeNameHistroy>
